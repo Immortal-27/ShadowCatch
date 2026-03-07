@@ -29,7 +29,7 @@ export function useSocket() {
             const data = await res.json();
             setTrafficLogs(data.logs || []);
             // Separate out alerts
-            const alertLogs = (data.logs || []).filter((l) => l.classification !== 'valid' && l.classification !== 'unreachable');
+            const alertLogs = (data.logs || []).filter((l) => l.classification !== 'valid');
             setAlerts(alertLogs);
         } catch (err) {
             console.error('Failed to fetch traffic:', err);

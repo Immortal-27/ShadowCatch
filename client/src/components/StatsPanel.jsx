@@ -1,17 +1,18 @@
 import { Activity, ShieldAlert, ShieldOff, Database, AlertTriangle, Gauge } from 'lucide-react';
+import MagicBentoCard from './MagicBentoCard';
 
 export default function StatsPanel({ stats }) {
     if (!stats) {
         return (
-            <div className="glass-card">
+            <MagicBentoCard className="glass-card" glowColor="255, 77, 109">
                 <div className="card-header">
-                    <h2 className="card-title"><Gauge size={18} /> Dashboard</h2>
+                    <h2 className="card-title"><Gauge size={18} style={{ color: 'var(--icon-default)' }} /> Dashboard</h2>
                 </div>
                 <div className="empty-state" style={{ padding: '24px' }}>
                     <div className="spinner" />
                     <p className="empty-state-text">Loading statistics...</p>
                 </div>
-            </div>
+            </MagicBentoCard>
         );
     }
 
@@ -21,9 +22,9 @@ export default function StatsPanel({ stats }) {
                 : 'low';
 
     return (
-        <div className="glass-card">
+        <MagicBentoCard className="glass-card" glowColor="255, 77, 109">
             <div className="card-header">
-                <h2 className="card-title"><Gauge size={18} /> Dashboard</h2>
+                <h2 className="card-title"><Gauge size={18} style={{ color: 'var(--icon-default)' }} /> Dashboard</h2>
                 <div className="card-badge" style={{
                     background: 'var(--accent-blue-dim)',
                     color: 'var(--accent-blue)',
@@ -73,6 +74,7 @@ export default function StatsPanel({ stats }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </MagicBentoCard>
     );
 }
+

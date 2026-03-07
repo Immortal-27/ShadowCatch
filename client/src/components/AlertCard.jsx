@@ -8,7 +8,7 @@ function formatTime(ts) {
 
 function getAlertIcon(classification) {
     switch (classification) {
-        case 'shadow': return <ShieldAlert size={16} style={{ color: 'var(--accent-red)' }} />;
+        case 'shadow': return <ShieldAlert size={16} style={{ color: 'var(--icon-active)' }} />;
         case 'method-mismatch': return <AlertTriangle size={16} style={{ color: 'var(--accent-amber)' }} />;
         case 'data-leak': return <KeyRound size={16} style={{ color: 'var(--accent-purple)' }} />;
         default: return null;

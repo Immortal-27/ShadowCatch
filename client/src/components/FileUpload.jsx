@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, CheckCircle, XCircle, FileJson } from 'lucide-react';
+import MagicBentoCard from './MagicBentoCard';
 
 export default function FileUpload({ onSpecUploaded }) {
     const [status, setStatus] = useState('idle'); // idle | uploading | success | error
@@ -49,10 +50,10 @@ export default function FileUpload({ onSpecUploaded }) {
     });
 
     return (
-        <div className="glass-card">
+        <MagicBentoCard className="glass-card">
             <div className="card-header">
                 <h2 className="card-title">
-                    <FileJson size={18} />
+                    <FileJson size={18} style={{ color: 'var(--icon-default)' }} />
                     API Spec
                 </h2>
             </div>
@@ -66,7 +67,7 @@ export default function FileUpload({ onSpecUploaded }) {
                     {status === 'uploading' ? (
                         <div className="spinner" />
                     ) : (
-                        <Upload size={28} />
+                        <Upload size={28} style={{ color: 'var(--icon-default)' }} />
                     )}
                 </div>
                 <p className="upload-text">
@@ -80,17 +81,18 @@ export default function FileUpload({ onSpecUploaded }) {
 
             {status === 'success' && (
                 <div className="upload-success" style={{ marginTop: 12 }}>
-                    <CheckCircle size={16} />
+                    <CheckCircle size={16} style={{ color: 'var(--icon-success)' }} />
                     {message}
                 </div>
             )}
 
             {status === 'error' && (
                 <div className="upload-error" style={{ marginTop: 12 }}>
-                    <XCircle size={16} />
+                    <XCircle size={16} style={{ color: 'var(--icon-active)' }} />
                     {message}
                 </div>
             )}
-        </div>
+        </MagicBentoCard>
     );
 }
+

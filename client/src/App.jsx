@@ -1,9 +1,11 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSocket } from './hooks/useSocket';
 import Header from './components/Header';
-import FileUpload from './components/FileUpload';
-import StatsPanel from './components/StatsPanel';
-import TrafficFeed from './components/TrafficFeed';
-import AlertsFeed from './components/AlertsFeed';
+import FaultyTerminal from './components/FaultyTerminal';
+import { NavigationDock } from './components/NavigationDock';
+import DashboardPage from './pages/DashboardPage';
+import FeaturesPage from './pages/FeaturesPage';
+import MembersPage from './pages/MembersPage';
 
 export default function App() {
     const {
@@ -16,18 +18,38 @@ export default function App() {
     } = useSocket();
 
     return (
-        <div className="app-container">
-            <Header isConnected={isConnected} />
-
-            <div className="top-section">
-                <FileUpload onSpecUploaded={refreshStats} />
-                <StatsPanel stats={stats} />
+        <Router>
+            <div className="faulty-terminal-bg">
+                <FaultyTerminal
+                    waveColor={[1.0, 0.2, 0.4]}
+                    waveSpeed={0.03}
+                    waveFrequency={2}
+                    waveAmplitude={0.3}
+                    colorNum={4}
+                    pixelSize={2}
+                    enableMouseInteraction={false}
+                />
             </div>
 
-            <div className="main-grid">
-                <TrafficFeed logs={trafficLogs} onClear={clearLogs} />
-                <AlertsFeed alerts={alerts} />
+            <div className="app-container">
+                <Header isConnected={isConnected} />
+
+                <Routes>
+                    <Route path="/" element={
+                        <DashboardPage
+                            trafficLogs={trafficLogs}
+                            alerts={alerts}
+                            stats={stats}
+                            clearLogs={clearLogs}
+                            refreshStats={refreshStats}
+                        />
+                    } />
+                    <Route path="/features" element={<FeaturesPage />} />
+                    <Route path="/members" element={<MembersPage />} />
+                </Routes>
             </div>
-        </div>
+
+            <NavigationDock />
+        </Router>
     );
 }

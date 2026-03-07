@@ -1,12 +1,13 @@
 import { ShieldOff } from 'lucide-react';
 import AlertCard from './AlertCard';
+import MagicBentoCard from './MagicBentoCard';
 
 export default function AlertsFeed({ alerts }) {
     return (
-        <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <MagicBentoCard className="glass-card" glowColor="255, 51, 102" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className="card-header">
-                <h2 className="card-title" style={{ color: 'var(--accent-red)' }}>
-                    <ShieldOff size={18} />
+                <h2 className="card-title">
+                    <ShieldOff size={18} style={{ color: 'var(--icon-active)' }} />
                     Shadow Alerts
                 </h2>
                 <span className="card-badge" style={{
@@ -20,7 +21,7 @@ export default function AlertsFeed({ alerts }) {
             {alerts.length === 0 ? (
                 <div className="empty-state">
                     <div className="empty-state-icon">
-                        <ShieldOff size={40} />
+                        <ShieldOff size={40} style={{ color: 'var(--icon-disabled)' }} />
                     </div>
                     <p className="empty-state-title">No threats detected</p>
                     <p className="empty-state-text">
@@ -34,6 +35,6 @@ export default function AlertsFeed({ alerts }) {
                     ))}
                 </div>
             )}
-        </div>
+        </MagicBentoCard>
     );
 }
