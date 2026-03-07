@@ -70,8 +70,6 @@ export default function CmdModal({ isOpen, onClose, method, path }) {
                         <span className="cmd-title">Byte Crafter Fetched — {method} {path}</span>
                     </div>
                     <div className="cmd-titlebar-buttons">
-                        <button className="cmd-btn cmd-btn-minimize">─</button>
-                        <button className="cmd-btn cmd-btn-maximize">□</button>
                         <button className="cmd-btn cmd-btn-close" onClick={onClose}>✕</button>
                     </div>
                 </div>

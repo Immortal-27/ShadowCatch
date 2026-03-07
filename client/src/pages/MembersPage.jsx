@@ -6,28 +6,28 @@ export default function MembersPage() {
     const members = [
         {
             name: "Milon Paul",
+            role: "Sysadmin",
             image: "/milon paul.jpeg",
             github: "https://github.com/milonpaul159",
-
         },
         {
             name: "Anuska Dey",
+            role: "Backend Developer",
             image: "/anuska dey.jpeg",
             objectPosition: 'center 20%',
             github: "https://github.com/anuskadey18",
-
         },
         {
             name: "Swarnabha Bhattacharjee",
+            role: "Backend Developer",
             image: "/swarnabha bhattacharjee.jpeg",
             github: "https://github.com/Immortal-27",
-
         },
         {
             name: "Abhimanyu Sengupta",
+            role: "Frontend Developer",
             image: "/Abhimanyu Sengupta.jpeg",
             github: "https://github.com/abhii734",
-
         }
     ];
 
@@ -78,6 +78,7 @@ export default function MembersPage() {
                         </div>
                         <div style={{ padding: '0 0.5rem 0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', transform: 'translateZ(30px)' }}>
                             <h3 style={{ color: 'var(--text-ice)', fontSize: '1.2rem', fontWeight: 700 }}>{m.name}</h3>
+                            <p style={{ color: 'var(--text-gray-blue)', fontSize: '0.85rem', fontWeight: 500, margin: 0 }}>{m.role}</p>
                             <div style={{ display: 'flex', gap: '0.8rem' }}>
                                 <a href={m.github} target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
                                     <Github size={18} style={{ color: 'var(--text-gray-blue)', transition: 'color 0.2s' }} />

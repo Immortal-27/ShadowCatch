@@ -44,6 +44,14 @@ app.post('/api/users', (req, res) => {
     res.status(201).json(newUser);
 });
 
+// DELETE /api/users/:id — Delete a user by ID
+app.delete('/api/users/:id', (req, res) => {
+    const idx = users.findIndex((u) => u.id === parseInt(req.params.id));
+    if (idx === -1) return res.status(404).json({ error: 'User not found' });
+    const deleted = users.splice(idx, 1)[0];
+    res.json({ message: 'User deleted', user: deleted });
+});
+
 // GET /api/health — Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', uptime: process.uptime() });
