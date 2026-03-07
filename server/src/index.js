@@ -53,6 +53,27 @@ async function startServer() {
         res.json({ status: 'ok', timestamp: new Date().toISOString() });
     });
 
+    // Proxy fetch — used by the CMD modal to fetch API responses
+    app.get('/api/proxy-fetch', async (req, res) => {
+        const { method = 'GET', path: reqPath } = req.query;
+        if (!reqPath) return res.status(400).json({ error: 'path is required' });
+        const target = process.env.PROXY_TARGET || 'http://localhost:4000';
+        try {
+            const url = `${target}${reqPath}`;
+            const response = await fetch(url, { method });
+            const contentType = response.headers.get('content-type') || '';
+            let body;
+            if (contentType.includes('json')) {
+                body = await response.json();
+                return res.json(body);
+            }
+            body = await response.text();
+            res.type('text').send(body);
+        } catch (err) {
+            res.status(502).json({ error: `Failed to reach proxy target: ${err.message}` });
+        }
+    });
+
     // Proxy middleware (must be last — catches all /proxy/* requests)
     app.use('/proxy', createProxy(io));
 

@@ -27,6 +27,8 @@
   --accent-blue-dim: rgba(59, 130, 246, 0.15);
   --accent-purple: #a855f7;
   --accent-purple-dim: rgba(168, 85, 247, 0.15);
+  --accent-green: #00ff88;
+  --accent-green-dim: rgba(0, 255, 136, 0.15);
   --accent-cyan: #06b6d4;
 
   /* ── Icons ── */
@@ -568,6 +570,12 @@ body {
   background: rgba(168, 85, 247, 0.05);
 }
 
+.traffic-entry.unreachable {
+  border-left: 3px solid var(--text-muted);
+  background: rgba(90, 100, 128, 0.05);
+  opacity: 0.6;
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -645,10 +653,10 @@ body {
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   padding: var(--space-md);
+  padding-left: calc(var(--space-md) + 4px);
   animation: alertPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transition: all var(--transition-normal);
   position: relative;
-  overflow: hidden;
 }
 
 .alert-card::before {
@@ -894,6 +902,7 @@ body {
   overflow: hidden;
   will-change: transform;
   transition: box-shadow var(--transition-normal);
+  transform-style: preserve-3d;
 }
 
 /* Radial border glow that follows cursor */
@@ -990,5 +999,186 @@ body {
 
   h1.header-title {
     font-size: 1.5rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   CMD Modal
+   ═══════════════════════════════════════════════════════ */
+.cmd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cmdFadeIn 0.2s ease;
+}
+
+@keyframes cmdFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.cmd-window {
+  width: 90vw;
+  max-width: 800px;
+  height: 70vh;
+  max-height: 520px;
+  background: #0c0c0c;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  animation: cmdSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cmdSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Title Bar ── */
+.cmd-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1e1e1e;
+  padding: 6px 12px;
+  user-select: none;
+}
+
+.cmd-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cmd-icon {
+  color: #ccc;
+  font-size: 10px;
+}
+
+.cmd-title {
+  color: #ccc;
+  font-size: 12px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.cmd-titlebar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cmd-btn {
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 12px;
+  width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cmd-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.cmd-btn-close:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+/* ── Terminal Body ── */
+.cmd-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #00ff41;
+  background: #0c0c0c;
+}
+
+.cmd-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cmd-body::-webkit-scrollbar-track {
+  background: #0c0c0c;
+}
+
+.cmd-body::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.cmd-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.cmd-text {
+  color: #00ff41;
+}
+
+.cmd-output {
+  color: #00ff41;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 8px 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.cmd-blink {
+  animation: cmdBlink 1s step-end infinite;
+}
+
+@keyframes cmdBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .cmd-window {
+    width: 95vw;
+    height: 60vh;
   }
 }

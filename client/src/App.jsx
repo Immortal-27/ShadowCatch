@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useSocket } from './hooks/useSocket';
 import Header from './components/Header';
 import FaultyTerminal from './components/FaultyTerminal';
@@ -8,6 +8,14 @@ import FeaturesPage from './pages/FeaturesPage';
 import MembersPage from './pages/MembersPage';
 
 export default function App() {
+    return (
+        <Router>
+            <AppContent />
+        </Router>
+    );
+}
+
+function AppContent() {
     const {
         isConnected,
         trafficLogs,
@@ -17,8 +25,11 @@ export default function App() {
         refreshStats,
     } = useSocket();
 
+    const location = useLocation();
+    const isMembersPage = location.pathname === '/members';
+
     return (
-        <Router>
+        <>
             <div className="faulty-terminal-bg">
                 <FaultyTerminal
                     waveColor={[1.0, 0.2, 0.4]}
@@ -50,6 +61,6 @@ export default function App() {
             </div>
 
             <NavigationDock />
-        </Router>
+        </>
     );
 }
