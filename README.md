@@ -2,6 +2,10 @@
 
 A passive API scanner that detects undocumented "Shadow" and "Zombie" API endpoints in real-time.
 
+## 🎬 Demo
+
+![ShadowCatch Demo — Live Shadow API Detection](https://youtu.be/WVaFRVUddbE)
+
 ## Architecture
 
 ```

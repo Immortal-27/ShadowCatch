@@ -7,14 +7,15 @@ const TrafficLog = require('../models/TrafficLog');
  * analyzes, and forwards traffic.
  */
 function createProxy(io) {
-    const target = process.env.PROXY_TARGET || 'http://localhost:4000';
+    const rawTarget = process.env.PROXY_TARGET || 'http://localhost:4000';
+    const targetUrl = new URL(rawTarget);
+    const basePath = targetUrl.pathname.replace(/\/$/, ''); // e.g. '/api/v3' or ''
 
     return createProxyMiddleware({
-        target,
+        target: targetUrl.origin,   // only origin, e.g. 'https://petstore3.swagger.io'
         changeOrigin: true,
-        pathRewrite: {
-            '^/proxy': '', // strip /proxy prefix before forwarding
-        },
+        secure: false,
+        pathRewrite: (path) => basePath + path, // /pet/1 → /api/v3/pet/1
         selfHandleResponse: false,
 
         on: {
@@ -71,7 +72,7 @@ function createProxy(io) {
                 console.error('Proxy error:', err.message);
                 res.status(502).json({
                     error: 'Proxy error',
-                    message: `Could not reach target server at ${target}`,
+                    message: `Could not reach target server at ${rawTarget}`,
                 });
             },
         },

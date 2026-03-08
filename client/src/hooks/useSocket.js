@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:3001';
+// Connect relative to the page origin so the Vite proxy (dev) or Nginx (prod) handles routing
+const SOCKET_URL = undefined;
 
 export function useSocket() {
     const socketRef = useRef(null);
