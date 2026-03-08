@@ -4,7 +4,7 @@ A passive API scanner that detects undocumented "Shadow" and "Zombie" API endpoi
 
 ## 🎬 Demo
 
-![ShadowCatch Demo — Live Shadow API Detection](https://youtu.be/WVaFRVUddbE)
+!ShadowCatch Demo — Live Shadow API Detection = "https://youtu.be/WVaFRVUddbE"
 
 ## Architecture
 
